@@ -107,8 +107,9 @@ function InitChannel(channel, ipIndex, ip, prt, okFunc, failFunc) {
         var flag = 0;
         // TCP截断
         if (sock.SubBuffer && sock.SubBufferLen > 0) {
+          // 缺少的buff长度
           flag = sock.SubBuffer.length - sock.SubBufferLen;
-          data.copy(sock.SubBuffer, sock.SubBufferLen, 0, flag + 4);
+          data.copy(sock.SubBuffer, sock.SubBufferLen, 0, flag);
           sock.emit("rtpData", sock.SubBuffer);
 
           sock.SubBufferLen = 0;
@@ -125,7 +126,7 @@ function InitChannel(channel, ipIndex, ip, prt, okFunc, failFunc) {
             sock.emit("rtpData", sock.SubBuffer);
             sock.SubBufferLen = 0;
           } else {
-            data.copy(sock.SubBuffer, 0, flag, data.length + 4);
+            data.copy(sock.SubBuffer, 0, flag, data.length);
             sock.SubBufferLen = data.length - flag;
           }
           flag += 4;
