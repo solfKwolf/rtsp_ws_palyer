@@ -1,0 +1,17 @@
+{
+  "name": "rtsp_ws_palyer",
+  "version": "1.0.0",
+  "description": "这是一个基于websocket代理播放RTSP的HTML5播放器方案。",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "node ./Server/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ws": "^8.17.0"
+  }
+}
