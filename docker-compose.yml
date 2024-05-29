@@ -1,3 +1,4 @@
+version: "3.1"
 services:
   rtsp-simple-server: #服务名
     image: aler9/rtsp-simple-server
@@ -6,10 +7,11 @@ services:
     - 1935:1935
     - 8888:8888
   ffmpeg:
+    environment:
+      - HOST_IP=${HOST_IP}
     image: jrottenberg/ffmpeg
     volumes:
-      # - .:/tmp/workdir
        - ./data:/data
-    command: -re -stream_loop -1 -i /data/1.mp4 -c copy -rtsp_transport tcp -f rtsp rtsp://192.168.1.2:8554/mystream
+    command: -re -stream_loop -1 -i /data/1.mp4 -c copy -rtsp_transport tcp -f rtsp rtsp://${HOST_IP}:8554/mystream
     stdin_open: true
     tty: true
